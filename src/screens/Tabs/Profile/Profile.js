@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Dimensions,
   Image,
   SafeAreaView,
   ScrollView,
@@ -30,8 +31,10 @@ import {
   WalletIcon2,
 } from '../../../../assets/icons';
 import colors from 'tailwindcss/colors';
-import {userImg} from '../../../components/images';
+import {streamImg, userImg} from '../../../components/images';
 import moment from 'moment';
+
+const screenWidth = Dimensions.get('window').width;
 
 const Profile = ({navigation}) => {
   const userData = {
@@ -65,8 +68,15 @@ const Profile = ({navigation}) => {
       <ScrollView className="flex-1">
         <View className="my-10 relative">
           <View className="relative">
-            <View className="absolute z-30  right-[145px] top-[-40px] mb-[-50px]">
-              <Image source={userImg} style={{width: 85, height: 85}} />
+            <View className="absolute z-30 top-[-40px] mb-[-50px]">
+              <Image
+                source={userImg}
+                style={{
+                  width: 85,
+                  height: 85,
+                  right: screenWidth <= 390 ? '-138%' : '-160%',
+                }}
+              />
             </View>
 
             <View
@@ -136,16 +146,12 @@ const Profile = ({navigation}) => {
                     Wallets
                   </Text>
                 </View>
-                <View className="flex-row items-center  py-3 px-2">
+                <View className="flex-row items-center justify-center  py-3 px-2 -left-4">
                   <View className="mx-1">
-                    <UserFillIcon
-                      height={8}
-                      width={10}
-                      color={colors.gray[400]}
-                    />
+                    <Image source={streamImg} style={{width: 10, height: 10}} />
                   </View>
                   <Text className="font-PoppinsRegular text-[8px] text-gray-400 mr-1">
-                    Personal info
+                    Stream
                   </Text>
                 </View>
               </View>
